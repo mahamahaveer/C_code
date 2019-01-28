@@ -1,12 +1,17 @@
+
 #include<stdio.h>
 #include<stdlib.h>
 
 #define MAX_SIZE 15
 #define MAX_CHAIN_SIZE 20
+
 int** create_ele(int);
 void insert(int,int);
 int hash_func(int );
+void search(int);
+void delete_ele(int);
 
+//3d array to handle collisions with linear probing
 int ***hash_arr;
 
 //creates arrays of keys and data
@@ -39,7 +44,7 @@ void insert(int key, int data)
         {
             return;
         }
-        if(hash_arr[index][ele][0] == -1 || hash_arr[index][ele][0] == 0)
+        if(hash_arr[index][ele][0] == 0)
         {
             hash_arr[index][ele][0] = key;
             hash_arr[index][ele][1] = data;
@@ -48,11 +53,68 @@ void insert(int key, int data)
         ele++;
     }
 
-    printf("index value %d\n", index);
-    printf("ele value %d\n", ele);
-    printf("inside array value key %d\n", hash_arr[index][ele][0]);
-    printf("inside array value value %d\n", hash_arr[index][ele][1]);
+    //printf("index value %d\n", index);
+    //printf("ele value %d\n", ele);
+    //printf("inside array value key %d\n", hash_arr[index][ele][0]);
+    //printf("inside array value value %d\n", hash_arr[index][ele][1]);
 
+}
+
+void search(int key)
+{
+    int index = hash_func(key);
+    int ele=0;
+    int item = 0;
+
+
+    //printf("index value %d\n", index);
+    while(1)
+    {
+        if(ele >= MAX_CHAIN_SIZE)
+        {
+            break;
+        }
+        else if(key == hash_arr[index][ele][0])
+        {
+            //printf("ele value %d\n", ele);
+            item = hash_arr[index][ele][1];
+        }
+
+        ele++;
+    }
+
+    if(NULL != item)
+    {
+        printf("Item value at key %d is %d\n",key,item);
+    }
+    else
+    {
+        printf("Key %d not found\n",key);
+    }
+
+}
+
+void delete_ele(int key)
+{
+    int index = hash_func(key);
+    int ele=0;
+
+    while(1)
+    {
+        if(ele >= MAX_CHAIN_SIZE)
+        {
+            return;
+        }
+        else if(key == hash_arr[index][ele][0])
+        {
+            hash_arr[index][ele][0] = 0;
+            hash_arr[index][ele][1] = 0;
+            printf("Key %d and it's value is deleted\n", key);
+            return;
+        }
+
+        ele++;
+    }
 }
 
 int main()
@@ -79,5 +141,13 @@ int main()
     insert(19,3);
     insert(32,5);
     insert(64,326);
+
+    search(25);
+    search(64);
+    search(46);
+
+    delete_ele(64);
+
+    search(64);
 
 }
