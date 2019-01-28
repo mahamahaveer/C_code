@@ -11,7 +11,7 @@ int hash_func(int );
 void search(int);
 void delete_ele(int);
 
-//3d array to handle collisions with linear probing
+//3d array to handle collisions with chaining
 int ***hash_arr;
 
 //creates arrays of keys and data
