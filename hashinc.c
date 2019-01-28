@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-#define MAX_SIZE 16
+#define MAX_SIZE 15
 #define MAX_CHAIN_SIZE 20
 int** create_ele(int);
 void insert(int,int);
@@ -64,7 +64,7 @@ int main()
         hash_arr[i] = create_ele(20);
     }
     /**
-    In contrast we can use hash_arr[16][20][2] to create above
+    In contrast we can use hash_arr[15][20][2] to create above
     hash_arr in stack instead of heap
     key  is at 0th index of each element ex: hash_arr[0][0][0]
     data is at 1st index of each element ex: hash_arr[0][0][1]
