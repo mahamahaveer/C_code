@@ -1,2 +1,5 @@
 # C_code
-practice codes
+Practice code for interview
+
+hashinc:
+        Hash table implementation ONLY with array
